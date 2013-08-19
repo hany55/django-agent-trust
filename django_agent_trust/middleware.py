@@ -102,6 +102,8 @@ class AgentMiddleware(object):
         )
 
         cookie_name = self._cookie_name(self._get_username(agent.user))
+        # Fix for custom users that utilize email addresses
+        cookie_name = cookie_name.replace('@', '_')
         encoded = self._encode_cookie(agent, agent.user)
         max_age = self._max_cookie_age(agent.user.agentsettings)
 
